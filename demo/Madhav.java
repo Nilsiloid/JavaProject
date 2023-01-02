@@ -2,28 +2,27 @@ package demo;
 
 import ecomm.*;
 import ecomm.Globals.Category;
-
 import java.util.*;
 
-public class Nilay extends Seller {
+public class Madhav extends Seller {
     private ArrayList<Mobile> mobiles = new ArrayList<Mobile>();
     private ArrayList<Book> books = new ArrayList<Book>();
 
-    public Nilay(String ID) {
+    public Madhav(String ID) {
         super(ID);
         addProduct();
     }
 
     public void addProduct() {
-        Book b1 = new Book(Category.Book, "b1", "Nilay-b1", 30, 5);
-        Book b2 = new Book(Category.Book, "b2", "Nilay-b2", 20, 4);
-        Mobile m1 = new Mobile(Category.Mobile, "m1", "Nilay-m1", 25, 9);
-        Mobile m2 = new Mobile(Category.Mobile, "m2", "Nilay-m2", 35, 6);
+        Book b3 = new Book(Category.Book, "b3", "Madhav-b3", 30, 5);
+        Book b4 = new Book(Category.Book, "b4", "Madhav-b4", 20, 4);
+        Mobile m3 = new Mobile(Category.Mobile, "m3", "Madhav-m3", 25, 9);
+        Mobile m4 = new Mobile(Category.Mobile, "m4", "Madhav-m4", 35, 6);
 
-        books.add(b1);
-        books.add(b2);
-        mobiles.add(m1);
-        mobiles.add(m2);
+        books.add(b3);
+        books.add(b4);
+        mobiles.add(m3);
+        mobiles.add(m4);
     }
 
     public void addPlatform(Platform thePlatform) {

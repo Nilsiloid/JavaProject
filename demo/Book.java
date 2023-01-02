@@ -8,6 +8,14 @@ public class Book extends Product {
     private float price;
     private Globals.Category category;
 
+    public Book(Globals.Category category, String name, String ProdID, float price, int qty){
+        this.ProductID=ProdID;
+        this.category = category;
+        this.name = name;
+        this.price = price;
+        this.Qty = qty;
+    }
+
     public Globals.Category getCategory() {
         return category;
     }
