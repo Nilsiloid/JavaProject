@@ -18,11 +18,11 @@ class PortalMain {
     }
 };
 int main() {
-    //PortalMain::Main();
-    DemoPortal dportal;
-    dportal.processUserCommand("Buy s 1");
-    dportal.processUserCommand("Buy s 2");
-    dportal.processUserCommand("List Book Price");
-    dportal.processUserCommand("List Book Name");
-    dportal.checkResponse();
+    PortalMain::Main();
+    // DemoPortal dportal;
+    // dportal.processUserCommand("Buy s 1");
+    // dportal.processUserCommand("Buy s 2");
+    // dportal.processUserCommand("List Book Price");
+    // dportal.processUserCommand("List Book Name");
+    // dportal.checkResponse();
 }
