@@ -9,13 +9,13 @@
 
 class DemoPortal: public Portal {
     private:
-    std::queue<std::string> userCommands; 
+    std::queue<std::string> userCommands; // to save user commands
     static int requestID;
     std::string portalID;
-    public:
     std::vector<std::string> split(std::string s);
     void printAll(std::vector<std::string> data);
     void Sort(std::string parameter, std::vector<std::string> &List);
+    public:
     DemoPortal();
     void processUserCommand(std::string command);
     void checkResponse();

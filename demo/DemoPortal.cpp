@@ -24,6 +24,7 @@ std::vector<std::string> DemoPortal::split(std::string s) {
     splitS.push_back(current);
     return splitS;
 }
+
 void DemoPortal::printAll(std::vector<std::string> data) {
     for(std::string word: data) {
         std::cout << word << "\n";
@@ -67,8 +68,8 @@ void DemoPortal::processUserCommand(std::string command) {
         outfile << portalID << " " << requestID << " " << splitCommand[0] << " " << splitCommand[1] << " " << splitCommand[2] << "\n";
     } else if(splitCommand[0] == "Check") {
         checkResponse();
-    } 
-    outfile.close();
+    }
+    outfile.close(); // closes file
 }
 
 void DemoPortal::checkResponse() {
@@ -76,8 +77,15 @@ void DemoPortal::checkResponse() {
     infile.open("PlatformToPortal.txt");
     std::string data;
     std::vector<std::string> printData;
+    std::string currentRequest = "0";
     while(getline(infile, data)) {
-        if(data == "-") {
+        std::vector<std::string> splitData = split(data);
+        std::string withoutID = "";
+        for(int i = 2; i < (int)splitData.size(); i++) {
+            withoutID += splitData[i];
+            withoutID += " ";
+        }
+        if(currentRequest != splitData[1]) {
             std::string oldestCommand = userCommands.front();
             std::vector<std::string> splitOld = split(oldestCommand);
             std::cout << oldestCommand << ": ";
@@ -96,19 +104,31 @@ void DemoPortal::checkResponse() {
             }
             printData.clear();
             userCommands.pop();
-            continue;
-        }
-        std::vector<std::string> splitData = split(data);
-        std::string withoutID = "";
-        for(int i = 2; i < (int)splitData.size(); i++) {
-            withoutID += splitData[i];
-            withoutID += " ";
+            currentRequest = splitData[1];
         }
         printData.push_back(withoutID);
     }
+    std::string oldestCommand = userCommands.front();
+    std::vector<std::string> splitOld = split(oldestCommand);
+    std::cout << oldestCommand << ": ";
+    if(splitOld[0] == "List") {
+        if(splitOld[2] != "Name" && splitOld[2] != "Price") {
+            std::cout << "error\n";
+        } else {
+            std::cout << "\n";
+            Sort(splitOld[2], printData);
+            printAll(printData);
+        }
+    } else if(splitOld[0] == "Start" || splitOld[0] == "Buy") {
+        printAll(printData);
+    } else {
+        std::cout << "error\n";
+    }
+    printData.clear();
+    userCommands.pop();
     infile.close();
 
-    std::ofstream outfile;
+    std::ofstream outfile; // to clear PlatformToPortal
     outfile.open("PlatformToPortal.txt");
     outfile << "";
     outfile.close();
