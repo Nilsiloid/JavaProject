@@ -15,7 +15,7 @@ class DemoPortal: public Portal {
     public:
     std::vector<std::string> split(std::string s);
     void printAll(std::vector<std::string> data);
-    void Sort(STDC_HEADERS::string parameter, std::vector<std::string> &List);
+    void Sort(std::string parameter, std::vector<std::string> &List);
     DemoPortal();
     void processUserCommand(std::string command);
     void checkResponse();
