@@ -17,7 +17,7 @@ public class DemoPlatform extends Platform {
 		sellers.add(aSeller);
 		return false;
 	}
-
+	
 	@Override
 	public void processRequests() {
 		// File tempFile = new File("PortalToPlatform.txt");

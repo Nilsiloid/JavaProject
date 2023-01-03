@@ -42,5 +42,4 @@ public class PlatformMain {
 		}
 		sc.close();
 	}
-
 }
