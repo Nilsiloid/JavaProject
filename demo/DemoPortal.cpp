@@ -79,6 +79,11 @@ void DemoPortal::writeToPlatform(std::vector<std::string> &printData) {
 }
 
 DemoPortal::DemoPortal() {
+    std::ofstream Platoutfile; // to clear PlatformToPortal
+    Platoutfile.open("PlatformToPortal.txt");
+    Platoutfile << "";
+    Platoutfile.close();
+
     portalID = "portal";
     userCommands.push("Start");
     std::ofstream outfile;
