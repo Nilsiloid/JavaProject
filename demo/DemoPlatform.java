@@ -20,9 +20,13 @@ public class DemoPlatform extends Platform {
 
 	@Override
 	public void processRequests() {
+		// File tempFile = new File("PortalToPlatform.txt");
+		// if(tempFile.exists() == false) {
+		// 	return;
+		// }
 		try {
 			BufferedReader br = new BufferedReader(new FileReader("PortalToPlatform.txt"));
-			BufferedWriter bw = new BufferedWriter(new FileWriter("PlatformToPortal.txt"));
+			BufferedWriter bw = new BufferedWriter(new FileWriter("PlatformToPortal.txt", true));
 			String line;
 			Globals g = new Globals();
 			while ((line = br.readLine()) != null) {
@@ -31,8 +35,10 @@ public class DemoPlatform extends Platform {
 				String output = order[0] + " " + order[1] + " "; // Portal ID + Request ID
 
 				if (order[2].equals("Start")) {
+					BufferedWriter bwTemp = new BufferedWriter(new FileWriter("PlatformToPortal.txt"));
+					bwTemp.write("");
 					output += g.getCategoryName(Category.Mobile) + " " + g.getCategoryName(Category.Book);
-					bw.write(output);
+					bw.write(output + "\n");
 				} else if (order[2].equals("List")) {
 					for (int i = 0; i < sellers.size(); i++) {
 						ArrayList<Product> temp = new ArrayList<Product>();
@@ -41,7 +47,7 @@ public class DemoPlatform extends Platform {
 						for (int j = 0; j < temp.size(); j++) {
 							String product = output + temp.get(j).getName() + " " + temp.get(j).getProductID() + " "
 									+ temp.get(j).getPrice() + " " + temp.get(j).getQuantity();
-							bw.write("\n" + product);
+							bw.write(product + "\n");
 						}
 					}
 				} else if (order[2].equals("Buy")) {
@@ -54,7 +60,7 @@ public class DemoPlatform extends Platform {
 							}
 						}
 					}
-					bw.write("\n" + output);
+					bw.write(output + "\n");
 				}
 			}
 			br.close();

@@ -9,7 +9,7 @@ class PortalMain {
         while(1) {
             string data;
             getline(std::cin, data);
-            if(data == "end") {
+            if(data == "End") {
                 break;
             } else {
                 demoportal.processUserCommand(data);

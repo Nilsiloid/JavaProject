@@ -33,10 +33,14 @@ public class PlatformMain {
 		 */
 
 		while (true) {
-			if (sc.next().equals("Check")) {
+			String input = sc.next();
+			if (input.equals("Check")) {
 				pf.processRequests();
+			} else if(input.equals("End")) {
+				break;
 			}
 		}
+		sc.close();
 	}
 
 }

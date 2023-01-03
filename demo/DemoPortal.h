@@ -11,6 +11,7 @@ class DemoPortal: public Portal {
     private:
     std::queue<std::string> userCommands; // to save user commands
     static int requestID;
+    static std::string currentRequest;
     std::string portalID;
     std::vector<std::string> split(std::string s);
     void printAll(std::vector<std::string> data);
