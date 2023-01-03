@@ -12,16 +12,25 @@ import ecomm.Globals.Category;
 public class DemoPlatform extends Platform {
 	private ArrayList<Seller> sellers = new ArrayList<Seller>();
 
+	public DemoPlatform() {
+		try {
+			BufferedWriter bw = new BufferedWriter(new FileWriter("PortalToPlatform.txt"));	
+			bw.write("");
+			bw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	@Override
 	public boolean addSeller(Seller aSeller) {
 		sellers.add(aSeller);
 		return false;
 	}
-	
+
 	@Override
 	public void processRequests() {
 		File tempFile = new File("PortalToPlatform.txt");
-		if(tempFile.exists()){
+		if(tempFile.exists()) {
 			try {
 				BufferedReader br = new BufferedReader(new FileReader("PortalToPlatform.txt"));
 				BufferedWriter bw = new BufferedWriter(new FileWriter("PlatformToPortal.txt", true));
