@@ -45,7 +45,8 @@ public class DemoPlatform extends Platform {
 					String[] order = line.split(" ");
 
 					String output = order[0] + " " + order[1] + " "; // Portal ID + Request ID
-					boolean flg =true;
+					boolean flg = true;
+					boolean flg2 = true; // Added so that non-existent product can't be bought
 
 					if (order[2].equals("Start")) {
 						output += g.getCategoryName(Category.Mobile) + " " + g.getCategoryName(Category.Book);
@@ -75,6 +76,7 @@ public class DemoPlatform extends Platform {
 					} else if (order[2].equals("Buy")) {
 						for (int i = 0; i < sellers.size(); i++) {
 							if (order[3].contains(sellers.get(i).getID())) {
+								flg2 = false;
 								if (sellers.get(i).buyProduct(order[3], Integer.valueOf(order[4])) == true) {
 									output += "Success";
 								} else {
@@ -82,7 +84,12 @@ public class DemoPlatform extends Platform {
 								}
 							}
 						}
-						bw.write(output + "\n");
+						if (flg2 == false){
+							bw.write(output + "\n");
+						}
+						else{
+							bw.write(output + "Failure\n");
+						}
 					}
 				}
 				br.close();

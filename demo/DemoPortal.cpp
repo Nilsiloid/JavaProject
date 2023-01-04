@@ -123,20 +123,12 @@ void DemoPortal::processUserCommand(std::string command)
     outfile.open("PortalToPlatform.txt", std::ios_base::app);
     if (splitCommand[0] == "List")
     {
-        if (int(splitCommand.size() != 3))
-        {
-            std::cout << "error\n";
-        }
         requestID++;
         userCommands.push(command);
         outfile << portalID << " " << requestID << " " << splitCommand[0] << " " << splitCommand[1] << "\n";
     }
     else if (splitCommand[0] == "Buy")
     {
-        if (int(splitCommand.size() != 3))
-        {
-            std::cout << "error\n";
-        }
         requestID++;
         userCommands.push(command);
         outfile << portalID << " " << requestID << " " << splitCommand[0] << " " << splitCommand[1] << " " << splitCommand[2] << "\n";
