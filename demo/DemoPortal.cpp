@@ -6,34 +6,25 @@
 #include <utility>
 #include <algorithm>
 #include <functional>
+#include <sstream> 
 #include "DemoPortal.h"
 
 int DemoPortal::requestID = 0;
 int DemoPortal::currentRequest = 1;
 int DemoPortal::portalID = 0;
 
-std::vector<std::string> DemoPortal::split(std::string s)       // Error to be fixed.
+std::vector<std::string> DemoPortal::split(std::string s)
 {
+    std::stringstream ss(s);
+    std::string word;
     std::vector<std::string> splitS;
-    std::string current = "";
-    for (char c : s)
-    {
-        if (c == ' ')
-        {
-            splitS.push_back(current);
-            current = "";
-        }
-        else
-        {
-            current.push_back(c);
-        }
+    while (ss >> word) {
+        splitS.push_back(word);
     }
-    if (current != " ")
-    {
-        splitS.push_back(current);
-    }
+
     return splitS;
 }
+
 int DemoPortal::toInt(std::string s)
 {
     int ans = 0;
@@ -60,8 +51,7 @@ void DemoPortal::Sort(std::string parameter, std::vector<std::string> &List)
     for (std::string s : List)
     {
         std::vector<std::string> splitS = split(s);
-        // std::cout<<s<<" "<<splitS.size()<<std::endl;     // check issue here.
-        if ((int)splitS.size() != 5)
+        if ((int)splitS.size() != 4)
         {
             products.push_back(make_pair("error", s));
             // std::cout << "HI";
