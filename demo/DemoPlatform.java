@@ -14,13 +14,18 @@ public class DemoPlatform extends Platform {
 
 	public DemoPlatform() {
 		try {
-			BufferedWriter bw = new BufferedWriter(new FileWriter("PortalToPlatform.txt"));	
+			BufferedWriter bw = new BufferedWriter(new FileWriter("PortalToPlatform.txt"));
 			bw.write("");
 			bw.close();
+
+			BufferedWriter bwTemp = new BufferedWriter(new FileWriter("PlatformToPortal.txt"));
+			bwTemp.write("");
+			bwTemp.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
+
 	@Override
 	public boolean addSeller(Seller aSeller) {
 		sellers.add(aSeller);
@@ -30,7 +35,7 @@ public class DemoPlatform extends Platform {
 	@Override
 	public void processRequests() {
 		File tempFile = new File("PortalToPlatform.txt");
-		if(tempFile.exists()) {
+		if (tempFile.exists()) {
 			try {
 				BufferedReader br = new BufferedReader(new FileReader("PortalToPlatform.txt"));
 				BufferedWriter bw = new BufferedWriter(new FileWriter("PlatformToPortal.txt", true));
@@ -40,22 +45,32 @@ public class DemoPlatform extends Platform {
 					String[] order = line.split(" ");
 
 					String output = order[0] + " " + order[1] + " "; // Portal ID + Request ID
+					boolean flg =true;
 
 					if (order[2].equals("Start")) {
-						BufferedWriter bwTemp = new BufferedWriter(new FileWriter("PlatformToPortal.txt"));
-						bwTemp.write("");
 						output += g.getCategoryName(Category.Mobile) + " " + g.getCategoryName(Category.Book);
 						bw.write(output + "\n");
 					} else if (order[2].equals("List")) {
 						for (int i = 0; i < sellers.size(); i++) {
 							ArrayList<Product> temp = new ArrayList<Product>();
-							temp = sellers.get(i).findProducts(order[3].equals("Book") ? Category.Book : Category.Mobile);
+							if(order[3].equals("Book")){
+								temp=sellers.get(i).findProducts(Category.Book);
+							}
+							else if(order[3].equals("Mobile")){
+								temp=sellers.get(i).findProducts(Category.Mobile);
+							}
+							else{
+								flg=false;
+							}
 
 							for (int j = 0; j < temp.size(); j++) {
 								String product = output + temp.get(j).getName() + " " + temp.get(j).getProductID() + " "
 										+ temp.get(j).getPrice() + " " + temp.get(j).getQuantity();
 								bw.write(product + "\n");
 							}
+						}
+						if(flg==false){
+							bw.write(output+"Error\n");
 						}
 					} else if (order[2].equals("Buy")) {
 						for (int i = 0; i < sellers.size(); i++) {
