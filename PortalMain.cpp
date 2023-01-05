@@ -1,28 +1,22 @@
 #include "demo/DemoPortal.h"
 #include <iostream>
 #include <fstream>
-using namespace std;
-class PortalMain {
-    public:
-    static void Main() {
-        DemoPortal demoportal;
-        while(1) {
-            string data;
-            getline(std::cin, data);
-            if(data == "End") {
+
+class PortalMain { // portalMain class
+public: // public function
+    static void Main() { // the main
+        DemoPortal demoportal; // object of demoportal
+        while(1) { // input loop
+            std::string data; 
+            getline(std::cin, data); // taking whole line as input 
+            if(data == "End") { // if the user wants to end
                 break;
             } else {
-                demoportal.processUserCommand(data);
+                demoportal.processUserCommand(data);  // asks demoportal to process user commands 
             }
         }
     }
 };
 int main() {
-    PortalMain::Main();
-    // DemoPortal dportal;
-    // dportal.processUserCommand("Buy s 1");
-    // dportal.processUserCommand("Buy s 2");
-    // dportal.processUserCommand("List Book Price");
-    // dportal.processUserCommand("List Book Name");
-    // dportal.checkResponse();
+    PortalMain::Main(); // runs Main of PortalMain
 }
