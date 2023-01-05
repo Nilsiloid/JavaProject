@@ -20,3 +20,5 @@ demo/Book.class
 PortalToPlatform.txt
 a.out
 
+demo/.DS_Store
+.gitignore

@@ -45,7 +45,6 @@ public class DemoPlatform extends Platform {
 					String[] order = line.split(" ");
 
 					String output = order[0] + " " + order[1] + " "; // Portal ID + Request ID
-					boolean flg = true;
 					boolean flg2 = true; // Added so that non-existent product can't be bought
 
 					if (order[2].equals("Start")) {
@@ -60,9 +59,6 @@ public class DemoPlatform extends Platform {
 							else if(order[3].equals("Mobile")){
 								temp=sellers.get(i).findProducts(Category.Mobile);
 							}
-							else{
-								flg=false;
-							}
 
 							for (int j = 0; j < temp.size(); j++) {
 								String product = output + temp.get(j).getName() + " " + temp.get(j).getProductID() + " "
@@ -70,9 +66,7 @@ public class DemoPlatform extends Platform {
 								bw.write(product + "\n");
 							}
 						}
-						if(flg==false){
-							bw.write(output+"Error\n");
-						}
+						
 					} else if (order[2].equals("Buy")) {
 						for (int i = 0; i < sellers.size(); i++) {
 							if (order[3].contains(sellers.get(i).getID())) {
