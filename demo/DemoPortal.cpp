@@ -11,7 +11,7 @@
 
 int DemoPortal::requestID = 0; // initializing requestID to 0
 int DemoPortal::currentRequest = 1; // initializing currentRequest to 1
-int DemoPortal::portalID = 0; // initializing portalID to 0
+std::string DemoPortal::portalID = "portal1"; // initializing portalID to 0
 
 std::vector<std::string> DemoPortal::split(std::string s) { 
     std::stringstream ss(s); // create a stream for the string 
@@ -93,7 +93,6 @@ DemoPortal::DemoPortal() {
     Portalout << "";
     Portalout.close(); // closes file
 
-    portalID++; // new portal is formed
 }
 
 void DemoPortal::processUserCommand(std::string command) {
@@ -127,8 +126,17 @@ void DemoPortal::checkResponse() {
     while (getline(infile, data)) {
         platformText.push_back(data); // adds to plaformText
     }
+    infile.close();
+
+    std::ofstream outfile; // to clear PlatformToPortal after each check so that next check doesnt clash with the current check
+    outfile.open("PlatformToPortal.txt"); // opens file
+    outfile << ""; // clears PlatfromToPortal
     for (int i = 0; i < (int)platformText.size(); i++) {
         std::vector<std::string> splitData = split(platformText[i]);
+        if(splitData[0] != portalID) { // if the data doesn't correspond to the currentPortalID, write it back to the terminal
+            outfile << platformText[i] << "\n";
+            continue; // continue as no need to write that to the current portal's terminal
+        }
         std::string withoutID = ""; // data without the platformID and request ID
         for (int i = 2; i < (int)splitData.size(); i++) {
             withoutID += splitData[i];
@@ -143,8 +151,5 @@ void DemoPortal::checkResponse() {
         }
     }
 
-    std::ofstream outfile; // to clear PlatformToPortal after each check so that next check doesnt clash with the current check
-    outfile.open("PlatformToPortal.txt"); // opens file
-    outfile << "";
     outfile.close(); // closes file
 }

@@ -12,7 +12,7 @@ private: // private attribtes and methods
     std::queue<std::string> userCommands; // to save user commands
     static int requestID; // counts the number of requests
     static int currentRequest; // to keep track of the next requestid when check comes
-    static int portalID; // to keep track of the number of portals created
+    static std::string portalID; // portalID
     std::vector<std::string> split(std::string s); // function to split a string
     int toInt(std::string s); // function to convert a string of numbers to int
     void printAll(std::vector<std::string> data); // prints all the strings of a vector of strings
