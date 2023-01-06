@@ -50,9 +50,17 @@ void DemoPortal::Sort(std::string parameter, std::vector<std::string> &List) {
         std::vector<std::string> splitS = split(s); // splits
         products.push_back(make_pair(splitS[parameterIndex], s)); // adds it to the products list
     }
-    std::sort(products.begin(), products.end(), // sorting
+    if(parameterIndex == 2) {
+        std::sort(products.begin(), products.end(), // sorting
         [](const std::pair<std::string, std::string> &p1, const std::pair<std::string, std::string> &p2) 
-              { return p1.first < p2.first; }); // lambda function to ensure stable sorting
+              { 
+                return std::stof(p1.first) < std::stof(p2.first); }); // lambda function to ensure stable sorting
+    } else { 
+        std::sort(products.begin(), products.end(), // sorting
+            [](const std::pair<std::string, std::string> &p1, const std::pair<std::string, std::string> &p2) 
+                { 
+                    return p1.first < p2.first; }); // lambda function to ensure stable sorting
+    }
     List.clear(); // clears the unsorted list
     for (auto p : products) {
         List.push_back(p.second); // adds to the list in sorted order
