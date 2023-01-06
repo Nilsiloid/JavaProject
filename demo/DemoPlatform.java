@@ -59,25 +59,17 @@ public class DemoPlatform extends Platform {
 											// statement of "Buy")
 					if (order[2].equals("Start")) { // Writes the List of Categories of products available in the file
 													// PlatformToPortal.txt
-						for (Category c : Category.values()) {
+						for (Category c : Category.values()) { // iterating through category
 							output += g.getCategoryName(c) + " ";
 						}
-						// output += g.getCategoryName(Category.Mobile) + " " +
-						// g.getCategoryName(Category.Book);
-						bw.write(output + "\n");
+						bw.write(output + "\n"); // final output
 					}
 
 					else if (order[2].equals("List")) { // Lists the products inn the specified category. Uses
 														// findProducts() function from the seller classes(eg.
 														// Nilay.java) to implement the same.
-						for (int i = 0; i < sellers.size(); i++) {
+						for (int i = 0; i < sellers.size(); i++) { // iterating through sellers	
 							ArrayList<Product> temp = new ArrayList<Product>();
-							// if(order[3].equals("Book")){
-							// temp=sellers.get(i).findProducts(Category.Book);
-							// }
-							// else if(order[3].equals("Mobile")){
-							// temp=sellers.get(i).findProducts(Category.Mobile);
-							// }
 
 							for (Category c : Category.values()) {
 								if (order[3].equals(g.getCategoryName(c))) {

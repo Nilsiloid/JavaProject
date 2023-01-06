@@ -24,7 +24,7 @@ std::vector<std::string> DemoPortal::split(std::string s) {
 }
 
 int DemoPortal::toInt(std::string s) {
-    int ans = 0; // the int value of the stirng
+    int ans = 0; // the int value of the string
     for (int i = 0; i < (int)s.size(); i++) {
         int digit = s[i] - '0'; // ascii number
         ans = ans * 10 + digit; 
