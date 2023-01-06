@@ -50,12 +50,12 @@ void DemoPortal::Sort(std::string parameter, std::vector<std::string> &List) {
         std::vector<std::string> splitS = split(s); // splits
         products.push_back(make_pair(splitS[parameterIndex], s)); // adds it to the products list
     }
-    if(parameterIndex == 2) {
+    if(parameterIndex == 2) { // have to convert to float before sorting
         std::sort(products.begin(), products.end(), // sorting
         [](const std::pair<std::string, std::string> &p1, const std::pair<std::string, std::string> &p2) 
               { 
                 return std::stof(p1.first) < std::stof(p2.first); }); // lambda function to ensure stable sorting
-    } else { 
+    } else {  // have to sort wrt string
         std::sort(products.begin(), products.end(), // sorting
             [](const std::pair<std::string, std::string> &p1, const std::pair<std::string, std::string> &p2) 
                 { 
