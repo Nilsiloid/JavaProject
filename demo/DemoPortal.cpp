@@ -11,7 +11,7 @@
 
 int DemoPortal::requestID = 0; // initializing requestID to 0
 int DemoPortal::currentRequest = 1; // initializing currentRequest to 1
-std::string DemoPortal::portalID = "portal1"; // initializing portalID to 0
+std::string DemoPortal::portalID = "portal1"; // initializing portalID
 
 std::vector<std::string> DemoPortal::split(std::string s) { 
     std::stringstream ss(s); // create a stream for the string 
