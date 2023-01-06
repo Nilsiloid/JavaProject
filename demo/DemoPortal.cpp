@@ -82,8 +82,7 @@ void DemoPortal::writeToTerminal(std::vector<std::string> &printData) {
         }
     } else if (splitOld[0] == "Start" || splitOld[0] == "Buy") { // if the command is to start or buy 
         printAll(printData); // just print
-    }
-    else if (splitOld[0] != "Check") { // if the command is not to check and the previous, its not allowed
+    } else if (splitOld[0] != "Check") { // if the command is not to check and the previous, its not allowed
         std::cout << "error\n";
     }
     printData.clear(); // clears the vector
