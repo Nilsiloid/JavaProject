@@ -68,6 +68,7 @@ public class DemoPlatform extends Platform {
 					else if (order[2].equals("List")) { // Lists the products inn the specified category. Uses
 														// findProducts() function from the seller classes(eg.
 														// Nilay.java) to implement the same.
+						boolean flag = false;
 						for (int i = 0; i < sellers.size(); i++) { // iterating through sellers	
 							ArrayList<Product> temp = new ArrayList<Product>();
 
@@ -76,6 +77,7 @@ public class DemoPlatform extends Platform {
 									// if the category exists, temp is an arraylist used to store the products in
 									// that category.
 									temp = sellers.get(i).findProducts(c);
+									flag = true;
 								}
 							}
 
@@ -86,6 +88,9 @@ public class DemoPlatform extends Platform {
 										+ temp.get(j).getPrice() + " " + temp.get(j).getQuantity();
 								bw.write(product + "\n");
 							}
+						}
+						if(flag == false) {
+							bw.write(output + "error\n");
 						}
 
 					} else if (order[2].equals("Buy")) { // Function to process the "Buy" command

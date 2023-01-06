@@ -108,11 +108,11 @@ void DemoPortal::processUserCommand(std::string command) {
 
     std::ofstream outfile; 
     outfile.open("PortalToPlatform.txt", std::ios_base::app); // to append to PortalToPlatform.txt
-    if (splitCommand[0] == "List") { // if command is to list
+    if (splitCommand[0] == "List" && (int)splitCommand.size() == 3) { // if command is to list
         requestID++; // valid request hence increment requestID
         userCommands.push(command); // add to userCommands
         outfile << portalID << " " << requestID << " " << splitCommand[0] << " " << splitCommand[1] << "\n"; // writes to file
-    } else if (splitCommand[0] == "Buy") { // if the user command is to buy
+    } else if (splitCommand[0] == "Buy" && (int)splitCommand.size() == 3) { // if the user command is to buy
         requestID++; // increment requestID
         userCommands.push(command); // add to userCommands
         outfile << portalID << " " << requestID << " " << splitCommand[0] << " " << splitCommand[1] << " " << splitCommand[2] << "\n"; // writes to file
@@ -143,6 +143,9 @@ void DemoPortal::checkResponse() {
         std::vector<std::string> splitData = split(platformText[i]);
         if(splitData[0] != portalID) { // if the data doesn't correspond to the currentPortalID, write it back to the terminal
             outfile << platformText[i] << "\n";
+            if(i == (int)platformText.size() - 1 && (int)printData.size() > 0) { // for multiple portals
+                writeToTerminal(printData);
+            }
             continue; // continue as no need to write that to the current portal's terminal
         }
         std::string withoutID = ""; // data without the platformID and request ID
